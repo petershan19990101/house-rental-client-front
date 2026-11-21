@@ -1,0 +1,28 @@
+/* UI 风格指导 token（附件1 第7章）：双端同源，客户端仅调整密度 */
+page { --brand-600:#2563EB; --brand-700:#1D4ED8; --brand-50:#EFF6FF; --success-600:#10B981; --warning-600:#F59E0B; --danger-600:#EF4444; --info-600:#0EA5E9; --neutral-900:#0F172A; --neutral-600:#475569; --neutral-400:#94A3B8; --neutral-200:#E2E8F0; --neutral-50:#F8FAFC; background:#F8FAFC; color:#0F172A; font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif; font-size:15px; line-height:24px; }
+.page { padding:16px; }
+.h1 { font-size:17px; line-height:26px; font-weight:600; margin-bottom:12px; }
+.h2 { font-size:15px; line-height:24px; font-weight:600; margin:16px 0 8px; }
+.h3 { font-size:15px; line-height:24px; font-weight:600; }
+.sub { font-size:12px; line-height:18px; color:#475569; }
+.num { font-size:24px; line-height:32px; font-weight:600; }
+.card { background:#FFFFFF; border:1px solid #E2E8F0; border-radius:8px; padding:16px; margin-bottom:12px; }
+.row { display:flex; align-items:center; justify-content:space-between; }
+.btn { height:48px; line-height:48px; text-align:center; border-radius:6px; background:#2563EB; color:#FFFFFF; font-size:15px; margin-top:16px; }
+.btn.ghost { background:#FFFFFF; color:#2563EB; border:1px solid #2563EB; }
+.btn.danger { background:#EF4444; color:#FFFFFF; }
+.btn.disabled { opacity:0.4; }
+.field { background:#FFFFFF; border:1px solid #E2E8F0; border-radius:6px; padding:12px; margin-bottom:16px; }
+.field:focus-within { border-color:#2563EB; }
+.label { font-size:12px; line-height:18px; color:#475569; margin-bottom:8px; }
+.input { font-size:15px; line-height:24px; color:#0F172A; min-height:24px; }
+.chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.chip { padding:6px 12px; border-radius:4px; background:#FFFFFF; border:1px solid #E2E8F0; font-size:12px; line-height:18px; color:#475569; }
+.chip.on { background:#EFF6FF; border-color:#2563EB; color:#2563EB; }
+.empty { padding:32px 0; text-align:center; color:#94A3B8; font-size:12px; }
+.steps { display:flex; gap:8px; margin-bottom:16px; }
+.step { flex:1; text-align:center; font-size:12px; line-height:18px; color:#94A3B8; padding:8px 0; border-radius:4px; background:#FFFFFF; border:1px solid #E2E8F0; }
+.step.on { color:#2563EB; border-color:#2563EB; background:#EFF6FF; }
+.timeline { font-size:12px; line-height:22px; color:#475569; }
+.list-item { padding:12px 0; border-bottom:1px solid #E2E8F0; }
+.list-item:last-child { border-bottom:none; }

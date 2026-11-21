@@ -1,0 +1,116 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "安居租"
+      }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/property/list",
+      "style": {
+        "navigationBarTitleText": "房源列表"
+      }
+    },
+    {
+      "path": "pages/property/detail",
+      "style": {
+        "navigationBarTitleText": "房源详情"
+      }
+    },
+    {
+      "path": "pages/booking/create",
+      "style": {
+        "navigationBarTitleText": "预约看房"
+      }
+    },
+    {
+      "path": "pages/lease/list",
+      "style": {
+        "navigationBarTitleText": "我的租约"
+      }
+    },
+    {
+      "path": "pages/lease/detail",
+      "style": {
+        "navigationBarTitleText": "租约详情"
+      }
+    },
+    {
+      "path": "pages/contract/detail",
+      "style": {
+        "navigationBarTitleText": "合同签署"
+      }
+    },
+    {
+      "path": "pages/repair/create",
+      "style": {
+        "navigationBarTitleText": "报维修"
+      }
+    },
+    {
+      "path": "pages/repair/list",
+      "style": {
+        "navigationBarTitleText": "我的工单"
+      }
+    },
+    {
+      "path": "pages/checkout/create",
+      "style": {
+        "navigationBarTitleText": "退租申请"
+      }
+    },
+    {
+      "path": "pages/checkout/settle",
+      "style": {
+        "navigationBarTitleText": "结算单确认"
+      }
+    },
+    {
+      "path": "pages/message/list",
+      "style": {
+        "navigationBarTitleText": "消息中心"
+      }
+    },
+    {
+      "path": "pages/mine/index",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F8FAFC"
+  },
+  "tabBar": {
+    "color": "#475569",
+    "selectedColor": "#2563EB",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/lease/list",
+        "text": "租约"
+      },
+      {
+        "pagePath": "pages/message/list",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的"
+      }
+    ]
+  }
+}
