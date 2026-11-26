@@ -1,0 +1,157 @@
+/* ==========================================================================
+   v1.1 客户端视觉与交互覆盖层
+   依据：《安居租客户端页面与交互优化需求文档 v1.1》第3章设计 token、
+        第8章页面级改动清单、第9章 P0/P1 分批
+   基线：house-rental-client-front master 40878b6
+   约束：仅样式与页内重排；不新增功能/页面/路由/业务字段，不改接口语义
+   说明：每段标注对应需求条目编号，便于附录A/B/C 验收清单逐条回查
+   ========================================================================== */
+
+/* ---------- 第3章 设计 token 落地 CSS 变量（STY-01 / VIS-02 / VIS-03） ---------- */
+page {
+  /* STY-01 色板：1 主色 + 2 辅助色 */
+  --brand-primary: #07C160;
+  --brand-primary-dark: #059A4C;
+  --brand-soft: #E8F9EF;
+  --accent-warm: #FF8A3D;
+  --info-blue: #2F6BFF;
+  /* VIS-01 三级背景 */
+  --bg-page: #F5F6F8;
+  --bg-card: #FFFFFF;
+  --line: #E6E8EC;
+  /* VIS-03 文字对比度分级 */
+  --text-primary: #1F2329;
+  --text-secondary: #5A6472;
+  --text-tertiary: #8A919E;
+  /* STY-03 圆角/阴影集合（≤3 种圆角、≤2 种阴影） */
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, .06);
+  --shadow-bar: 0 -2px 8px rgba(16, 24, 40, .08);
+  /* 覆盖基线 tokens.css 蓝色系取值，全站统一到 v1.1 主色（保留原变量名，避免改动页面语义） */
+  --brand-600: #059A4C;
+  --brand-700: #04803F;
+  --brand-50: #E8F9EF;
+  --neutral-900: #1F2329;
+  --neutral-600: #5A6472;
+  --neutral-400: #8A919E;
+  --neutral-200: #E6E8EC;
+  --neutral-50: #F5F6F8;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* VIS-05 / STY-04：内容区 ≤1200px 居中；底部留白按是否含固定操作栏区分 */
+.page { max-width: 1200px; margin: 0 auto; padding: 12px 16px 24px; box-sizing: border-box; }
+.page--with-bar { padding-bottom: 88px; }
+
+/* VIS-03 / STY-02：同屏文字层级 ≤3 级 */
+.h1 { font-size: 20px; line-height: 28px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary); }
+.h2 { font-size: 16px; line-height: 24px; font-weight: 600; margin: 16px 0 8px; color: var(--text-primary); }
+.h3 { font-size: 15px; line-height: 22px; font-weight: 600; color: var(--text-primary); }
+.sub { font-size: 13px; line-height: 20px; color: var(--text-secondary); }
+.muted { font-size: 12px; line-height: 18px; color: var(--text-tertiary); }
+.num { font-size: 20px; line-height: 26px; font-weight: 600; color: var(--accent-warm); }
+
+/* VIS-01：卡片白底 + 1px 中性描边 + 极轻阴影，与 --bg-page 形成层级 */
+.card { background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-m); box-shadow: var(--shadow-card); padding: 16px; margin-bottom: 12px; }
+
+/* VIS-06：悬停/按下/禁用/加载等组件态的可见变化类（模板以 hover-class 引用） */
+.hover-dim { opacity: .78; }
+.hover-bg { background: #FAFBFC; }
+.hover-strong { background: var(--brand-700); }
+.hover-soft { background: var(--brand-soft); }
+.is-loading { opacity: .6; }
+
+/* IX-03：主次按钮分级（实心主色 vs 描边）；VIS-06：禁用态可辨 */
+.btn { display: flex; align-items: center; justify-content: center; height: 48px; border-radius: var(--radius-s); border: 1px solid transparent; box-sizing: border-box; background: var(--brand-primary-dark); color: #FFFFFF; font-size: 16px; font-weight: 600; margin-top: 16px; }
+.btn--ghost { background: #FFFFFF; color: var(--brand-primary-dark); border-color: var(--brand-primary-dark); }
+.btn--sm { height: 36px; font-size: 14px; margin-top: 0; }
+.btn--block { width: 100%; }
+.btn--disabled, .btn.disabled { opacity: .45; }
+.btn.ghost { background: #FFFFFF; color: var(--brand-primary-dark); border: 1px solid var(--brand-primary-dark); }
+
+/* IX-02：明确搜索主操作（输入框 + 主色按钮） */
+.searchbar { display: flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 6px 6px 6px 16px; box-shadow: var(--shadow-card); margin-bottom: 12px; }
+.search-input { flex: 1 1 auto; min-height: 32px; font-size: 14px; color: var(--text-primary); }
+.search-ph { color: var(--text-tertiary); font-size: 14px; }
+.search-btn { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; height: 36px; padding: 0 20px; border-radius: var(--radius-pill); background: var(--brand-primary-dark); color: #FFFFFF; font-size: 14px; font-weight: 600; }
+
+/* IX-02：筛选（区域/价格/户型/整租合租）可视化展开面板 */
+.filter-bar { display: flex; gap: 8px; margin-bottom: 8px; }
+.filter-trigger { flex: 1 1 0; display: flex; align-items: center; justify-content: center; gap: 4px; height: 34px; border-radius: var(--radius-s); background: #FFFFFF; border: 1px solid var(--line); font-size: 13px; color: var(--text-secondary); }
+.filter-trigger.on { border-color: var(--brand-primary-dark); color: var(--brand-primary-dark); background: var(--brand-soft); font-weight: 600; }
+.filter-trigger.filled { color: var(--brand-primary-dark); }
+.caret { font-size: 10px; }
+.filter-panel { display: flex; flex-wrap: wrap; gap: 8px; background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius-m); padding: 12px; margin-bottom: 12px; box-shadow: var(--shadow-card); }
+.filter-option { padding: 6px 12px; border-radius: var(--radius-s); background: #F7F8FA; font-size: 13px; color: var(--text-secondary); }
+.filter-option.on { background: var(--brand-soft); color: var(--brand-primary-dark); font-weight: 600; }
+
+/* IX-04/IX-05：胶囊切换与选中态（颜色 + 字重 双信号） */
+.chips { display: flex; gap: 8px; margin-bottom: 12px; }
+.chip { padding: 6px 14px; border-radius: var(--radius-pill); background: #FFFFFF; border: 1px solid var(--line); font-size: 13px; color: var(--text-secondary); }
+.chip.on { background: var(--brand-soft); border-color: var(--brand-primary-dark); color: var(--brand-primary-dark); font-weight: 600; }
+.seg { display: inline-flex; padding: 3px; background: #EDEFF2; border-radius: var(--radius-pill); margin-bottom: 12px; }
+.seg-item { padding: 6px 18px; border-radius: var(--radius-pill); font-size: 13px; color: var(--text-secondary); }
+.seg-item.on { background: #FFFFFF; color: var(--brand-primary-dark); font-weight: 600; box-shadow: var(--shadow-card); }
+
+/* LOGO-01/02/03 + STY-01：首屏品牌区（图形标识 + 品牌名 + 主色容器，高度 ≥48px） */
+.brandbar { display: flex; align-items: center; gap: 8px; min-height: 56px; padding: 8px 12px; margin-bottom: 12px; background: var(--brand-soft); border: 1px solid #CFEFDD; border-radius: var(--radius-m); }
+.brand-logo { width: 32px; height: 32px; flex: 0 0 32px; }
+/* LOGO-03 标识辨识度：Logo 源文件 src/static/brand/logo-anju.svg 为 24×24 viewBox 的实心图形、品牌主色 #059A4C，置于品牌浅底 #E8F9EF 上对比度 ≥3:1；页面按 24/32px 整数倍渲染，100% 缩放不糊不叠 */
+.brand-name { font-size: 20px; line-height: 28px; font-weight: 600; color: #057A3D; letter-spacing: 1px; }
+.brand-slogan { margin-left: auto; font-size: 12px; color: #0B6B3A; }
+
+/* IX-05/IX-07 + STY-02：快捷入口统一线性图标 + 文字，等距栅格 */
+.quick-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.quick-item { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 8px; background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius-m); box-shadow: var(--shadow-card); }
+.quick-icon { width: 28px; height: 28px; }
+.quick-label { font-size: 13px; line-height: 20px; font-weight: 600; color: var(--text-primary); }
+.quick-desc { font-size: 12px; line-height: 18px; color: var(--text-secondary); text-align: center; }
+
+/* IX-07 + VIS-03：功能列表 图标 + 分组标题 + 分组间距，行高 ≥48px */
+.group { background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius-m); box-shadow: var(--shadow-card); margin-bottom: 16px; overflow: hidden; }
+.group-title { padding: 12px 16px 4px; font-size: 12px; line-height: 18px; font-weight: 600; color: var(--text-secondary); letter-spacing: .5px; }
+.list-row { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 16px; border-top: 1px solid #F0F1F4; }
+.list-row:first-child { border-top: none; }
+.list-icon { width: 22px; height: 22px; flex: 0 0 22px; }
+.list-label { flex: 1 1 auto; font-size: 15px; color: var(--text-primary); }
+.list-value { font-size: 13px; color: var(--text-secondary); }
+.list-arrow { font-size: 14px; color: var(--text-tertiary); }
+.list-item { padding: 0; border: none; }
+
+/* IX-01/IX-08 + VIS-05：刷新结果反馈（时间戳/成功提示/失败重试）与空态 */
+.freshness { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 12px; line-height: 18px; color: var(--text-secondary); }
+.alert { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: var(--radius-s); font-size: 13px; line-height: 20px; margin-bottom: 12px; }
+.alert--fail { background: #FDECEC; color: #B42318; }
+.alert--ok { background: var(--brand-soft); color: #057A3D; }
+.alert-action { margin-left: auto; font-weight: 600; }
+.empty { padding: 32px 16px; text-align: center; }
+.empty-icon { width: 48px; height: 48px; display: block; margin: 0 auto 12px; }
+.empty-text { font-size: 14px; line-height: 22px; color: var(--text-secondary); margin-bottom: 12px; }
+.empty-action { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 20px; border-radius: var(--radius-pill); background: var(--brand-primary-dark); color: #FFFFFF; font-size: 14px; font-weight: 600; }
+.toolbar { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.toolbar-hint { flex: 1 1 auto; font-size: 12px; line-height: 18px; color: var(--text-secondary); }
+
+/* VIS-01/VIS-03 + STY-03：房源详情模块统一卡片与标题层级，去除多余浅色块 */
+.hero { background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius-m); box-shadow: var(--shadow-card); padding: 16px; margin-bottom: 12px; }
+.hero-price { font-size: 20px; line-height: 28px; font-weight: 600; color: var(--accent-warm); }
+.mod { background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius-m); box-shadow: var(--shadow-card); padding: 16px; margin-bottom: 12px; }
+.mod-title { display: flex; align-items: center; gap: 8px; font-size: 15px; line-height: 22px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+.mod-icon { width: 20px; height: 20px; }
+.kv { font-size: 13px; line-height: 22px; color: var(--text-secondary); }
+.kv-key { color: #6B7280; }
+
+/* IX-03 + VIS-05：固定底部操作栏，唯一的实心主色主操作 + 描边次操作 */
+.bottom-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: #FFFFFF; border-top: 1px solid var(--line); box-shadow: var(--shadow-bar); }
+.bottom-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 12px; padding: 10px 16px; box-sizing: border-box; }
+.bottom-bar .btn { margin-top: 0; }
+.btn-bar-primary { flex: 1 1 60%; }
+.btn-bar-ghost { flex: 1 1 40%; }
+
+/* VIS-06：输入框/选择类组件默认与聚焦态 */
+.field { background: #FFFFFF; border: 1px solid var(--line); border-radius: var(--radius-s); padding: 12px; margin-bottom: 16px; }
+.field:focus-within { border-color: var(--brand-primary-dark); }

@@ -1,23 +1,56 @@
 <template>
-  <view class="page">
-    <view class="card">
+  <view class="page page--with-bar">
+    <!-- LOGO-02：四处同一标识；STY-03：圆角/阴影集合统一 -->
+    <view class="brandbar">
+      <image class="brand-logo" src="/static/brand/logo-anju.svg" />
+      <text class="brand-name">安居租</text>
+    </view>
+
+    <!-- VIS-01/03：模块统一卡片 + 模块标题层级，去除多余浅色块 -->
+    <view class="hero">
       <view class="row">
         <text class="h3">{{ item.title }}</text>
         <StateTag :display-status="item.displayStatus" :tone="item.tone" />
       </view>
-      <view class="sub">{{ item.region }} · {{ item.layout }} · {{ item.rent }} 元/月</view>
-      <view class="timeline" style="margin-top:8px">{{ item.desc }}</view>
+      <view class="hero-price">¥{{ item.rent }} <text class="sub">元/月</text></view>
+      <view class="kv"><text class="kv-key">户型　</text>{{ item.layout }}</view>
+      <view class="kv"><text class="kv-key">区域　</text>{{ item.region }}</view>
     </view>
-    <view class="card">
-      <view class="h2">经纪人名片</view>
-      <view class="sub">李四 · 阳光花园门店 · 138****8899</view>
+
+    <view class="mod">
+      <view class="mod-title">
+        <image class="mod-icon" src="/static/icons/ic-loc.svg" />
+        <text>房源说明</text>
+      </view>
+      <view class="kv">{{ item.desc }}</view>
     </view>
-    <view class="card">
-      <view class="h2">配套与位置</view>
-      <view class="sub">电梯 · 空调 · 洗衣机 · 冰箱 · 近地铁6号线 500m</view>
+
+    <view class="mod">
+      <view class="mod-title">
+        <image class="mod-icon" src="/static/icons/ic-agent.svg" />
+        <text>经纪人名片</text>
+      </view>
+      <view class="kv">李四 · 阳光花园门店 · 138****8899</view>
     </view>
-    <view class="btn" @click="book">预约看房</view>
-    <view class="btn ghost" @click="fav">收藏房源</view>
+
+    <view class="mod">
+      <view class="mod-title">
+        <image class="mod-icon" src="/static/icons/ic-facility.svg" />
+        <text>配套与位置</text>
+      </view>
+      <view class="kv">电梯 · 空调 · 洗衣机 · 冰箱 · 近地铁6号线 500m</view>
+    </view>
+
+    <!-- IX-03：固定底部操作栏，唯一主色实心主操作 + 描边次操作 -->
+    <view class="bottom-bar">
+      <view class="bottom-bar-inner">
+        <view class="btn btn--ghost btn-bar-ghost" hover-class="hover-soft" @click="fav">
+          <image src="/static/icons/ic-fav.svg" style="width:16px;height:16px;margin-right:6px" />
+          <text>收藏房源</text>
+        </view>
+        <view class="btn btn-bar-primary" hover-class="hover-strong" @click="book">预约看房</view>
+      </view>
+    </view>
   </view>
 </template>
 
