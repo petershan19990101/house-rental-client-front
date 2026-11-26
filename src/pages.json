@@ -88,28 +88,37 @@
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#FFFFFF",
-    "backgroundColor": "#F8FAFC"
+    "backgroundColor": "#F5F6F8"
   },
   "tabBar": {
-    "color": "#475569",
-    "selectedColor": "#2563EB",
+    "color": "#5A6472",
+    "selectedColor": "#059A4C",
     "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "static/icons/tab-home.svg",
+        "selectedIconPath": "static/icons/tab-home-on.svg"
       },
       {
         "pagePath": "pages/lease/list",
-        "text": "租约"
+        "text": "租约",
+        "iconPath": "static/icons/tab-lease.svg",
+        "selectedIconPath": "static/icons/tab-lease-on.svg"
       },
       {
         "pagePath": "pages/message/list",
-        "text": "消息"
+        "text": "消息",
+        "iconPath": "static/icons/tab-msg.svg",
+        "selectedIconPath": "static/icons/tab-msg-on.svg"
       },
       {
         "pagePath": "pages/mine/index",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "static/icons/tab-mine.svg",
+        "selectedIconPath": "static/icons/tab-mine-on.svg"
       }
     ]
   }
